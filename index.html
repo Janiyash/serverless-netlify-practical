@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Serverless Computing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eaf0f6;
+            padding: 50px;
+            text-align: center;
+        }
+        .card {
+            max-width: 500px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        h1 { color: #1f5a8a; }
+        button {
+            background: #1f5a8a;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background: #174769; }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #1a7a3a;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Serverless Computing</h1>
+        <p>Cloud Computing Lab Practical 6</p>
+        <p>This application uses a Netlify Function to process requests.</p>
+        <button onclick="callFunction()">Call Serverless Function</button>
+        <p id="result">Click the button to test the function.</p>
+    </div>
+
+    <script>
+        async function callFunction() {
+            const result = document.getElementById("result");
+            result.textContent = "Calling function...";
+            try {
+                const response = await fetch("/.netlify/functions/greet");
+                const data = await response.json();
+                result.textContent = data.message;
+            } catch (error) {
+                result.textContent = "Error calling the function.";
+            }
+        }
+    </script>
+</body>
+</html>
